@@ -1,0 +1,104 @@
+
+import { Head, Appear, Image } from 'mdx-deck'
+import { Box } from 'grid-styled'
+import { FullScreenCode } from 'mdx-deck/layouts'
+
+export { default as theme } from './theme'
+
+<Head>
+  <title>Server Side Request Forgery (SSRF)</title>
+</Head>
+
+## Server Side Request Forgery (SSRF)  
+
+---
+
+## What is SSRF ? 
+🤔
+---
+<Box> 
+ Server Side Request Forgery (SSRF) / Cross Site Port Attact (XSPA) <p></p> Are Web vulnerabilities for reading files on the local server and also find other active services but this does not end here.
+ It is also possible to scan the internal network to map IPs and open ports.
+ </Box>
+---
+### Impacts of SSRF 
+---
+ <Appear>
+<li> It is possible to scan ports and IP addresses. </li>
+<li> Interact with some protocols such as Gopher, which allow you to make further discoveries. </li>
+<li> Discover the IP addresses of servers running behind a reverse proxy. </li>
+<li> Remote code execution. </li>
+ </Appear>
+---
+<Box style= {{ backgroundColor : "white"}}> 
+<Image src="img/image1.png" 
+style={{
+      width: '800px',
+      height: '300px',
+    }} /> 
+</Box>
+---
+<Box> 
+<Image src="img/image2.png" 
+style={{
+      display: 'flex',
+      justifyAlign: 'center',
+    }} /> 
+</Box>
+---
+<img  src='https://www.dailysecurity.fr/images/firewall.jpg' />
+---
+
+### Example request sensible by SSRF ?
+
+---
+```jsx
+<?php 
+
+$curl = curl_init();
+curl_setopt_array($curl, array(
+    CURLOPT_URL => $_GET['url']
+));
+
+$resp = curl_exec($curl);
+curl_close($curl);
+
+?>
+```
+---
+<img src="https://www.dailysecurity.fr/images/SSRF_File.png" />
+---
+<img src="https://www.dailysecurity.fr/images/yes.gif" />
+
+
+---
+
+How to solve SSRF problem ?
+---
+
+It is essential to put in place rules on the resources to be loaded.
+You define on 
+<ul>
+  <Appear>
+    <ul>DNS names and / or allowed IP addresses =>
+    <li> In the absence of localhost and 0.0.1, this prevents access to server services / files. </li>
+    <li> illegitimate access to the internal network will be prevented </li>
+     </ul>
+    <li>Error-Based : an error, HTTP (404 or 500) for example, to deduce the existing resources or not </li>
+    <li>Forbidden acces with Protocols file:// , sftp://  </li>
+  </Appear>
+</ul>
+---
+Thank you for having listened attentively. 😊
+<img src="./img/giphy.webp" width="480" height="392" frameBorder="0"  allowFullScreen></img>
+
+---
+<Box style= {{fontSize: '16px'}}> 
+
+
+Links<p></p>
+https://www.netsparker.com/blog/web-security/server-side-request-forgery-vulnerability-ssrf/
+https://www.acunetix.com/blog/articles/ssrf-vulnerability-used-to-scan-the-web-servers-network/
+https://www.vaadata.com/blog/fr/comprendre-la-vulnerabilite-web-server-side-request-forgery-1/
+https://www.agarri.fr/blog/archives/2014/09/11/trying_to_hack_redis_via_http_requests/index.html
+</Box>
