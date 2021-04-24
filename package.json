@@ -8,7 +8,7 @@
     "help": "mdx-deck"
   },
   "devDependencies": {
-    "mdx-deck": "^1.6.7"
+    "mdx-deck": "4.1.1"
   },
   "name": "server_side_request_forgery",
   "version": "1.0.0"
